@@ -1,0 +1,25 @@
+cmake_minimum_required(VERSION 3.20)
+project(rive_framebuffer LANGUAGES C CXX)
+
+if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/vendor/rive-thorvg/rive-runtime/include/rive/artboard.hpp")
+    message(FATAL_ERROR "Run git submodule update --init --recursive from the rive-framebuffer checkout.")
+endif()
+
+function(add_rive_bridge)
+    set(BUILD_TESTING OFF)
+    add_subdirectory(vendor/rive-thorvg)
+endfunction()
+add_rive_bridge()
+include(cmake/timeline.cmake)
+enable_rive_timelines(rive_thorvg)
+
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    include(CTest)
+    if(BUILD_TESTING)
+        add_executable(test-timeline tests/timeline.cpp)
+        target_compile_features(test-timeline PRIVATE cxx_std_17)
+        target_link_libraries(test-timeline PRIVATE rive_thorvg)
+        add_test(NAME timeline COMMAND test-timeline
+            "${CMAKE_CURRENT_SOURCE_DIR}/vendor/rive-thorvg/rive-runtime/tests/unit_tests/assets/draw_rule_cycle.riv")
+    endif()
+endif()
