@@ -1,4 +1,4 @@
-# Render .riv files into a framebuffer
+# Rive framebuffer renderer for ThorVG
 
 Use the renderer in a C or C++ application that supplies a pixel buffer. It reads a self-contained Rive file from memory, selects an artboard, advances its animation and draws into the buffer. The application owns the display, clock and input. The same API can render a single desktop image, update a device display, or draw assets at startup and keep the pixels for later.
 
@@ -6,13 +6,13 @@ Rive’s C++ runtime evaluates the artwork and ThorVG draws it through the pinne
 
 ## Add the renderer to an ESP-IDF application
 
-These paths assume a checkout of this package under `third_party/rive-framebuffer` in your application. From that checkout, run `git submodule update --init --recursive --depth 1` once.
+These paths assume a checkout of this package under `third_party/rive-thorvg-framebuffer` in your application. From that checkout, run `git submodule update --init --recursive --depth 1` once.
 
 In your application's top-level `CMakeLists.txt`, append the component directory before including ESP-IDF's project file. Use your existing project name and settings.
 
 ```cmake
 cmake_minimum_required(VERSION 3.20)
-list(APPEND EXTRA_COMPONENT_DIRS "${CMAKE_CURRENT_LIST_DIR}/third_party/rive-framebuffer/esp-idf/rive_thorvg")
+list(APPEND EXTRA_COMPONENT_DIRS "${CMAKE_CURRENT_LIST_DIR}/third_party/rive-thorvg-framebuffer/esp-idf/rive_thorvg")
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(my_device)
 ```
@@ -30,7 +30,7 @@ ESP-IDF exposes that file as `_binary_scene_riv_start` and `_binary_scene_riv_en
 From a CMake 3.20+ project with C and C++ enabled, add the package directory and link the same target. The target exports `rive_thorvg.h`. Building either integration requires the Unix `patch` utility.
 
 ```cmake
-add_subdirectory(third_party/rive-framebuffer)
+add_subdirectory(third_party/rive-thorvg-framebuffer)
 target_link_libraries(my_app PRIVATE rive_thorvg)
 ```
 

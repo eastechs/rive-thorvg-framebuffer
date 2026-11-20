@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.20)
-project(rive_framebuffer LANGUAGES C CXX)
+project(rive_thorvg_framebuffer LANGUAGES C CXX)
 
 if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/vendor/rive-thorvg/rive-runtime/include/rive/artboard.hpp")
-    message(FATAL_ERROR "Run git submodule update --init --recursive from the rive-framebuffer checkout.")
+    message(FATAL_ERROR "Run git submodule update --init --recursive from the rive-thorvg-framebuffer checkout.")
 endif()
 
 function(add_rive_bridge)
