@@ -2,7 +2,7 @@
 
 Use the renderer in a C or C++ application that supplies a pixel buffer. It reads a self-contained Rive file from memory, selects an artboard, advances its animation and draws into the buffer. The application owns the display, clock and input. The same API can render a single desktop image, update a device display, or draw assets at startup and keep the pixels for later.
 
-This package builds Rive’s C++ runtime and ThorVG through the pinned upstream `rive-thorvg` C API. This package adds playback for artboards whose animation is a timeline. [C API](vendor/rive-thorvg/include/rive_thorvg.h) · [Timeline change](cmake/timeline.patch) · [Credits and licenses](THIRD_PARTY.md)
+Rive’s C++ runtime evaluates the artwork and ThorVG draws it through the pinned upstream `rive-thorvg` C API. This package adds playback for timeline-only artboards. [C API](https://github.com/xseignard/rive-thorvg/blob/208c68c9b638949c49ce3308a03632105ba3ba43/include/rive_thorvg.h) · [Timeline change](cmake/timeline.patch) · [Credits and licenses](THIRD_PARTY.md)
 
 ## Add the renderer to an ESP-IDF application
 
